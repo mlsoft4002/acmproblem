@@ -1,3 +1,4 @@
+// C语言使用字符数组实现,以下代码在Microsoft Visual Studio 2013中通过。
 #include<stdio.h>  
 #include<string.h>  
 int havepoint(char str[])  
@@ -17,14 +18,17 @@ void change(char str[])
     len=strlen(str);  
     if(havepoint(str))  
     {  
-        for(i=len-1;str[i]=='0';i--)  
+        for(i=len-1;str[i]=='0';i--)  //去掉后面的0
         {  
             str[i]='\0';  
             len--;  
         }  
-        if(str[len-1]=='.')  
+        if(str[len-1]=='.')  //如果最后一个是点，则去掉点
         str[len-1]='\0';  
     }  
+    int mlen=0;
+    for(i=0; str[i]=='0'&& !(str[i+1]=='\0'|| str[i+1]=='.');i++) mlen++;
+    for(i=0; mlen>0&&i<len- mlen;i++) str[i]= str[i+mlen];
 }  
 int main()  
 {  
@@ -38,4 +42,4 @@ int main()
         else printf("NO\n");  
     }  
     return 0;  
-} 
+}  
