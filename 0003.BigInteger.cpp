@@ -1,23 +1,15 @@
-Ô´´úÂë
-1327
-ÔËĞĞÊ±¼ä:35MS          ÄÚ´æÊ¹ÓÃ:240K
-ÔËĞĞ½á¹û: Accepted            ÓïÑÔ: G++ 
-ÓÃ»§:0706401050    Ìá½»Ê±¼ä :2009-08-11 14:50:04.0
-[ Copy to Clipboard ]    [ Save to File]    [ Print ]
-
-1
 #include <iostream.h> 
 #include <string>     
 #include <stdio.h>
 #include <algorithm>
 
-//´óÕûÊıÀà
+//å¤§æ•´æ•°ç±»
 class BigInteger
 {
 public:
-    //Ä¬ÈÏ¹¹Ôì
+    //é»˜è®¤æ„é€ 
     explicit BigInteger(const std::string& str="0") : m_str(str) {Normal();}
-    //¹¹Ôì
+    //æ„é€ 
     explicit BigInteger(double d)
     {
         m_str=ToString(d);
@@ -33,51 +25,51 @@ public:
         m_str=ToString(i);
         Normal();
     }
-    //ÊäÈëÁ÷ÔËËã
+    //è¾“å…¥æµè¿ç®—
     friend std::ostream& operator<< (std::ostream& out, const BigInteger& big);
-    //Êä³öÁ÷ÔËËã
+    //è¾“å‡ºæµè¿ç®—
     friend std::istream& operator>> (std::istream& in, BigInteger& big);
-    //¸³Öµ
+    //èµ‹å€¼
     BigInteger& operator= (const BigInteger& rbs);
     BigInteger& operator= (double d);
     BigInteger& operator= (float f);
     BigInteger& operator= (int i);
-    //¸ß¾«¶È³Ë·¨
+    //é«˜ç²¾åº¦ä¹˜æ³•
     BigInteger operator* (const BigInteger& other)
     { return signMultiply(*this, other);}
-    //¸ß¾«¶È¼Ó·¨
+    //é«˜ç²¾åº¦åŠ æ³•
     BigInteger operator +(const BigInteger& other)
     { return signAdd(*this, other);}
-    //¸ß¾«¶È¼õ·¨
+    //é«˜ç²¾åº¦å‡æ³•
     BigInteger operator- (const BigInteger& other)
     { return signMinuse(*this, other);}
-    //¸ß¾«¶È³Ë·½ 
+    //é«˜ç²¾åº¦ä¹˜æ–¹ 
     BigInteger operator ^(int n)
     { return BigInteger(pow(m_str, n));}
-    //¸ß¾«¶ÈÕıÊıÈ¡Ä£
+    //é«˜ç²¾åº¦æ­£æ•°å–æ¨¡
     BigInteger operator% (const BigInteger& other);
-    //±È½Ï
+    //æ¯”è¾ƒ
     bool operator< (const BigInteger& rbs)
     { return signCompare(*this, rbs)==-1; }
     bool operator== (const BigInteger& rbs)
     { return signCompare(*this, rbs)==0; }
     std::string ToString();
 private:
-    //¹æ·¶»¯
+    //è§„èŒƒåŒ–
     void Normal();
     void Unnormal();
-    //×ª»»
+    //è½¬æ¢
     std::string ToString(int n);
     std::string ToString(double n);
     std::string ToString(float n);
-    //ÓĞ·ûºÅ¸ß¾«¶ÈÔËËã¼°Æä±È½Ï
+    //æœ‰ç¬¦å·é«˜ç²¾åº¦è¿ç®—åŠå…¶æ¯”è¾ƒ
     BigInteger signMultiply(const BigInteger& l, const BigInteger& r);
     BigInteger signAdd(const BigInteger& l, const BigInteger& r);
     BigInteger signMinuse(const BigInteger& l, const BigInteger& r);
     int signCompare(const BigInteger& a, const BigInteger& b);
-    //ÎŞ·ûºÅ±È½Ï
+    //æ— ç¬¦å·æ¯”è¾ƒ
     int Compare(const std::string& a, const std::string& b);
-    //ÎŞ·ûºÅ¸ß¾«¶ÈÔËËã
+    //æ— ç¬¦å·é«˜ç²¾åº¦è¿ç®—
     std::string MultiplyEx (std::string s, std::string t);
     std::string Multiply (std::string lbs, std::string rbs);
     std::string AddEx(std::string a, std::string b);
@@ -90,7 +82,7 @@ private:
     bool isZero(const std::string& s);
 private:
     bool m_sign;
-    std::string m_str; //ÄÚ²¿×Ö·û´®
+    std::string m_str; //å†…éƒ¨å­—ç¬¦ä¸²
 };
 
 std::ostream& operator<< (std::ostream& out, const BigInteger& big)
@@ -258,7 +250,7 @@ std::string BigInteger::Multiply(std::string lbs, std::string rbs)
     char buffer[10];
     int lenLbs=lbs.length();
     int lenRbs=rbs.length();
-    //³õÊ¼»¯Êı×é
+    //åˆå§‹åŒ–æ•°ç»„
     int sizeLbs=lenLbs%4==0?lenLbs/4:lenLbs/4+1;
     int sizeRbs=lenRbs%4==0?lenRbs/4:lenRbs/4+1;
     g_lbs=new int[sizeLbs+1];
@@ -267,7 +259,7 @@ std::string BigInteger::Multiply(std::string lbs, std::string rbs)
     memset(g_lbs, 0, sizeof(int)*(sizeLbs+1));
     memset(g_rbs, 0, sizeof(int)*(sizeRbs+1));
     std::string str;
-    //×Ö·û´®µ½Êı×é×ª»¯
+    //å­—ç¬¦ä¸²åˆ°æ•°ç»„è½¬åŒ–
     int count=1;
     while (lbs.length()>=4)
     {
@@ -296,10 +288,10 @@ std::string BigInteger::Multiply(std::string lbs, std::string rbs)
         rbs.clear();
         g_rbs[count]=atoi(str.c_str());
     }
-    //³õÊ¼»¯½á¹ûÊı×é
+    //åˆå§‹åŒ–ç»“æœæ•°ç»„
     g_result=new int[sizeLbs*sizeRbs+2];
     memset(g_result, 0, sizeof(int)*(sizeLbs*sizeRbs+2));
-    //³Ë·¨ÔËËã
+    //ä¹˜æ³•è¿ç®—
     for (i=1; i<=sizeLbs; ++i)
     {
         for (j=1; j<=sizeRbs; ++j)
@@ -309,7 +301,7 @@ std::string BigInteger::Multiply(std::string lbs, std::string rbs)
             g_result[i+j-1]=g_result[i+j-1]%10000;
         }
     }
-    //Êä³ö
+    //è¾“å‡º
     std::string ret;
     i=sizeLbs*sizeRbs+1;
     while (!g_result[i])
@@ -354,7 +346,7 @@ std::string BigInteger::Add(std::string lbs, std::string rbs)
     int* g_rbs;
     int* g_result;
     char buffer[10];
-    //µ÷Õû
+    //è°ƒæ•´
     int lenLbs=lbs.length();
     int lenRbs=rbs.length();
     if (lenLbs<lenRbs)
@@ -362,7 +354,7 @@ std::string BigInteger::Add(std::string lbs, std::string rbs)
         std::swap(lbs, rbs);
         std::swap(lenLbs, lenRbs);
     }
-    //³õÊ¼»¯Êı×é
+    //åˆå§‹åŒ–æ•°ç»„
     int sizeLbs=lenLbs%4==0?lenLbs/4:lenLbs/4+1;
     int sizeRbs=lenRbs%4==0?lenRbs/4:lenRbs/4+1;
     g_lbs=new int[sizeLbs];
@@ -371,7 +363,7 @@ std::string BigInteger::Add(std::string lbs, std::string rbs)
     memset(g_lbs, 0, sizeof(int)*sizeLbs);
     memset(g_rbs, 0, sizeof(int)*sizeRbs);
     std::string str;
-    //×Ö·û´®µ½Êı×é×ª»¯
+    //å­—ç¬¦ä¸²åˆ°æ•°ç»„è½¬åŒ–
     int count=0;
     while (lbs.length()>=4)
     {
@@ -400,10 +392,10 @@ std::string BigInteger::Add(std::string lbs, std::string rbs)
         rbs.clear();
         g_rbs[count]=atoi(str.c_str());
     }
-    //³õÊ¼»¯½á¹ûÊı×é
+    //åˆå§‹åŒ–ç»“æœæ•°ç»„
     g_result=new int[sizeLbs+1];
     memset(g_result, 0, sizeof(int)*(sizeLbs+1));
-    //¼Ó·¨ÔËËã
+    //åŠ æ³•è¿ç®—
     for (j=0; j<sizeLbs; ++j)
     {
         if (j<sizeRbs)
@@ -417,7 +409,7 @@ std::string BigInteger::Add(std::string lbs, std::string rbs)
         g_result[j+1]+=g_result[j]/10000;
         g_result[j]%=10000;
     }
-    //Êä³ö
+    //è¾“å‡º
     std::string ret;
     i=sizeLbs;
     while (!g_result[i])
@@ -661,7 +653,7 @@ std::string BigInteger::Minuss (std::string lbs, std::string rbs, bool& sign)
     int* g_rbs;
     int* g_result;
     char buffer[10];
-    //µ÷Õû
+    //è°ƒæ•´
     int lenLbs=lbs.length();
     int lenRbs=rbs.length();
     sign=true;
@@ -682,7 +674,7 @@ std::string BigInteger::Minuss (std::string lbs, std::string rbs, bool& sign)
         std::swap(lbs, rbs);
         std::swap(lenLbs, lenRbs);
     }
-    //³õÊ¼»¯Êı×é
+    //åˆå§‹åŒ–æ•°ç»„
     int sizeLbs=lenLbs%4==0?lenLbs/4:lenLbs/4+1;
     int sizeRbs=lenRbs%4==0?lenRbs/4:lenRbs/4+1;
     g_lbs=new int[sizeLbs];
@@ -691,7 +683,7 @@ std::string BigInteger::Minuss (std::string lbs, std::string rbs, bool& sign)
     memset(g_lbs, 0, sizeof(int)*sizeLbs);
     memset(g_rbs, 0, sizeof(int)*sizeRbs);
     std::string str;
-    //×Ö·û´®µ½Êı×é×ª»¯
+    //å­—ç¬¦ä¸²åˆ°æ•°ç»„è½¬åŒ–
     int count=0;
     while (lbs.length()>=4)
     {
@@ -720,10 +712,10 @@ std::string BigInteger::Minuss (std::string lbs, std::string rbs, bool& sign)
         rbs.clear();
         g_rbs[count]=atoi(str.c_str());
     }
-    //³õÊ¼»¯½á¹ûÊı×é
+    //åˆå§‹åŒ–ç»“æœæ•°ç»„
     g_result=new int[sizeLbs+1];
     memset(g_result, 0, sizeof(int)*(sizeLbs+1));
-    //¼Ó·¨ÔËËã
+    //åŠ æ³•è¿ç®—
     for (j=0; j<sizeLbs; ++j)
     {
         if (j<sizeRbs)
@@ -745,7 +737,7 @@ std::string BigInteger::Minuss (std::string lbs, std::string rbs, bool& sign)
             g_result[j]=g_lbs[j];
         }
     }
-    //Êä³ö
+    //è¾“å‡º
     std::string ret;
     i=sizeLbs;
     while (!g_result[i])
@@ -930,7 +922,7 @@ int BigInteger::Compare(const std::string& a, const std::string& b)
     }
 }
 
-//´óÕûÊı³Ë·½ÔËËã
+//å¤§æ•´æ•°ä¹˜æ–¹è¿ç®—
 std::string BigInteger::pow(const std::string& b, int n)
 {
     if ( n==1 )
@@ -952,7 +944,7 @@ std::string BigInteger::pow(const std::string& b, int n)
     }
 }
 
-//²âÊÔ³ÌĞò
+//æµ‹è¯•ç¨‹åº
 int main(int argc, char* argv[])
 {
     //usage
